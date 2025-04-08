@@ -2,6 +2,11 @@ import { Tabs } from 'expo-router';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../../constants/theme';
 
+type TabBarIconProps = {
+  color: string;
+  size: number;
+};
+
 export default function TabLayout() {
   return (
     <Tabs
@@ -28,7 +33,7 @@ export default function TabLayout() {
         name="study"
         options={{
           title: 'Study',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color, size }: TabBarIconProps) => (
             <FontAwesome name="book" size={size} color={color} />
           ),
         }}
@@ -37,7 +42,7 @@ export default function TabLayout() {
         name="ai-assistant"
         options={{
           title: 'AI Assistant',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color, size }: TabBarIconProps) => (
             <MaterialIcons name="smart-toy" size={size} color={color} />
           ),
         }}
@@ -46,7 +51,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color, size }) => (
+          tabBarIcon: ({ color, size }: TabBarIconProps) => (
             <FontAwesome name="user" size={size} color={color} />
           ),
         }}
