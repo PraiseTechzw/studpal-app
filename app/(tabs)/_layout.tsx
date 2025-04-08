@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
-import { FontAwesome } from '@expo/vector-icons';
-import { COLORS } from '../../constants/theme';
+import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
+import { COLORS, SIZES } from '../../constants/theme';
 
 export default function TabLayout() {
   return (
@@ -11,30 +11,25 @@ export default function TabLayout() {
           backgroundColor: COLORS.white,
           borderTopWidth: 0,
           elevation: 0,
-          boxShadow: 'none',
+          shadowOpacity: 0,
           height: 60,
           paddingBottom: 8,
           paddingTop: 8,
         },
         tabBarActiveTintColor: COLORS.primary,
         tabBarInactiveTintColor: COLORS.textLight,
+        tabBarLabelStyle: {
+          fontFamily: 'Poppins-Medium',
+          fontSize: SIZES.small,
+        },
       }}
     >
-      <Tabs.Screen
-        name="home"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }: { color: string }) => (
-            <FontAwesome name="home" size={24} color={color} />
-          ),
-        }}
-      />
       <Tabs.Screen
         name="study"
         options={{
           title: 'Study',
-          tabBarIcon: ({ color }: { color: string }) => (
-            <FontAwesome name="book" size={24} color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="book" size={size} color={color} />
           ),
         }}
       />
@@ -42,8 +37,8 @@ export default function TabLayout() {
         name="ai-assistant"
         options={{
           title: 'AI Assistant',
-          tabBarIcon: ({ color }: { color: string }) => (
-            <FontAwesome name="microchip" size={24} color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="smart-toy" size={size} color={color} />
           ),
         }}
       />
@@ -51,11 +46,11 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color }: { color: string }) => (
-            <FontAwesome name="user" size={24} color={color} />
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesome name="user" size={size} color={color} />
           ),
         }}
       />
     </Tabs>
   );
-}
+} 

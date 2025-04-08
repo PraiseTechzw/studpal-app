@@ -6,8 +6,8 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
-import { COLORS, SIZES, FONTS, SHADOWS } from '../../constants/theme';
 import { FontAwesome } from '@expo/vector-icons';
+import { COLORS, SIZES, FONTS } from '../../constants/theme';
 
 const features = [
   {
@@ -134,7 +134,6 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     justifyContent: 'center',
     alignItems: 'center',
-    ...SHADOWS.small,
   },
   statsContainer: {
     flexDirection: 'row',
@@ -148,7 +147,6 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.base,
     marginHorizontal: SIZES.base,
     alignItems: 'center',
-    ...SHADOWS.small,
   },
   statNumber: {
     fontSize: SIZES.extraLarge,
@@ -178,7 +176,6 @@ const styles = StyleSheet.create({
     padding: SIZES.base * 2,
     borderRadius: SIZES.base,
     margin: SIZES.base,
-    ...SHADOWS.small,
   },
   featureIcon: {
     fontSize: SIZES.extraLarge,
@@ -200,7 +197,6 @@ const styles = StyleSheet.create({
     margin: SIZES.base * 2,
     padding: SIZES.base * 2,
     borderRadius: SIZES.base,
-    ...SHADOWS.medium,
   },
   aiTitle: {
     fontSize: SIZES.large,

@@ -3,66 +3,126 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
+  Image,
   TouchableOpacity,
+  ScrollView,
   SafeAreaView,
 } from 'react-native';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES, FONTS, SHADOWS } from '../../constants/theme';
+import { router } from 'expo-router';
 
-const stats = [
-  { id: '1', label: 'Study Hours', value: '24', icon: 'clock-o' },
-  { id: '2', label: 'Subjects', value: '6', icon: 'book' },
-  { id: '3', label: 'Tasks Completed', value: '12', icon: 'check-circle' },
-  { id: '4', label: 'Quiz Score', value: '85%', icon: 'star' },
-];
+// Mock user data
+const userData = {
+  name: 'John Doe',
+  email: 'john.doe@example.com',
+  avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
+  studyTime: '24 hours',
+  completedCourses: 5,
+  achievements: 3,
+};
 
-const settings = [
-  { id: '1', title: 'Notifications', icon: 'bell' },
-  { id: '2', title: 'Dark Mode', icon: 'moon-o' },
-  { id: '3', title: 'Study Reminders', icon: 'calendar' },
-  { id: '4', title: 'Language', icon: 'language' },
-  { id: '5', title: 'Help & Support', icon: 'question-circle' },
-  { id: '6', title: 'Privacy Policy', icon: 'shield' },
-  { id: '7', title: 'Terms of Service', icon: 'file-text-o' },
+// Mock settings options
+const settingsOptions = [
+  {
+    id: '1',
+    title: 'Account Settings',
+    icon: 'user',
+    iconType: 'FontAwesome',
+  },
+  {
+    id: '2',
+    title: 'Notifications',
+    icon: 'bell',
+    iconType: 'FontAwesome',
+  },
+  {
+    id: '3',
+    title: 'Study Preferences',
+    icon: 'book',
+    iconType: 'FontAwesome',
+  },
+  {
+    id: '4',
+    title: 'Privacy',
+    icon: 'lock',
+    iconType: 'FontAwesome',
+  },
+  {
+    id: '5',
+    title: 'Help & Support',
+    icon: 'question-circle',
+    iconType: 'FontAwesome',
+  },
+  {
+    id: '6',
+    title: 'About',
+    icon: 'info-circle',
+    iconType: 'FontAwesome',
+  },
 ];
 
 export default function ProfileScreen() {
+  const handleLogout = () => {
+    // TODO: Implement actual logout logic
+    router.replace('/');
+  };
+
+  const renderSettingItem = (item) => {
+    const IconComponent = item.iconType === 'FontAwesome' ? FontAwesome : 
+                         item.iconType === 'MaterialIcons' ? MaterialIcons : Ionicons;
+    
+    return (
+      <TouchableOpacity key={item.id} style={styles.settingItem}>
+        <View style={styles.settingIconContainer}>
+          <IconComponent name={item.icon} size={20} color={COLORS.primary} />
+        </View>
+        <Text style={styles.settingTitle}>{item.title}</Text>
+        <MaterialIcons name="chevron-right" size={24} color={COLORS.textLight} />
+      </TouchableOpacity>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
-          <View style={styles.profileIconContainer}>
-            <FontAwesome name="user-circle" size={80} color={COLORS.primary} />
-          </View>
-          <Text style={styles.name}>John Doe</Text>
-          <Text style={styles.email}>john.doe@example.com</Text>
+          <Text style={styles.headerTitle}>Profile</Text>
+          <TouchableOpacity style={styles.editButton}>
+            <FontAwesome name="edit" size={20} color={COLORS.primary} />
+          </TouchableOpacity>
         </View>
-
+        
+        <View style={styles.profileSection}>
+          <Image source={{ uri: userData.avatar }} style={styles.avatar} />
+          <Text style={styles.userName}>{userData.name}</Text>
+          <Text style={styles.userEmail}>{userData.email}</Text>
+        </View>
+        
         <View style={styles.statsContainer}>
-          {stats.map((stat) => (
-            <View key={stat.id} style={styles.statCard}>
-              <FontAwesome name={stat.icon} size={24} color={COLORS.primary} />
-              <Text style={styles.statValue}>{stat.value}</Text>
-              <Text style={styles.statLabel}>{stat.label}</Text>
-            </View>
-          ))}
+          <View style={styles.statItem}>
+            <Text style={styles.statValue}>{userData.studyTime}</Text>
+            <Text style={styles.statLabel}>Study Time</Text>
+          </View>
+          <View style={styles.statDivider} />
+          <View style={styles.statItem}>
+            <Text style={styles.statValue}>{userData.completedCourses}</Text>
+            <Text style={styles.statLabel}>Courses</Text>
+          </View>
+          <View style={styles.statDivider} />
+          <View style={styles.statItem}>
+            <Text style={styles.statValue}>{userData.achievements}</Text>
+            <Text style={styles.statLabel}>Achievements</Text>
+          </View>
         </View>
-
-        <View style={styles.settingsContainer}>
-          {settings.map((setting) => (
-            <TouchableOpacity key={setting.id} style={styles.settingItem}>
-              <View style={styles.settingLeft}>
-                <FontAwesome name={setting.icon} size={20} color={COLORS.text} />
-                <Text style={styles.settingTitle}>{setting.title}</Text>
-              </View>
-              <FontAwesome name="chevron-right" size={16} color={COLORS.textLight} />
-            </TouchableOpacity>
-          ))}
+        
+        <View style={styles.settingsSection}>
+          <Text style={styles.sectionTitle}>Settings</Text>
+          {settingsOptions.map(renderSettingItem)}
         </View>
-
-        <TouchableOpacity style={styles.logoutButton}>
-          <FontAwesome name="sign-out" size={20} color={COLORS.white} />
+        
+        <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+          <FontAwesome name="sign-out" size={20} color={COLORS.error} />
           <Text style={styles.logoutText}>Logout</Text>
         </TouchableOpacity>
       </ScrollView>
@@ -76,96 +136,133 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.background,
   },
   header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
-    padding: SIZES.base * 2,
-    borderBottomWidth: 1,
-    borderBottomColor: COLORS.lightGray,
+    paddingHorizontal: SIZES.padding,
+    paddingTop: SIZES.padding,
+    paddingBottom: SIZES.base,
   },
-  profileIconContainer: {
+  headerTitle: {
+    fontSize: SIZES.extraLarge,
+    fontFamily: FONTS.bold,
+    color: COLORS.text,
+  },
+  editButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: COLORS.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+    ...SHADOWS.small,
+  },
+  profileSection: {
+    alignItems: 'center',
+    paddingVertical: SIZES.padding,
+  },
+  avatar: {
     width: 100,
     height: 100,
     borderRadius: 50,
-    backgroundColor: COLORS.lightGray,
-    justifyContent: 'center',
-    alignItems: 'center',
     marginBottom: SIZES.base,
+    ...SHADOWS.medium,
   },
-  name: {
+  userName: {
     fontSize: SIZES.large,
     fontFamily: FONTS.bold,
     color: COLORS.text,
-    marginBottom: SIZES.base / 2,
+    marginBottom: 2,
   },
-  email: {
+  userEmail: {
     fontSize: SIZES.font,
     fontFamily: FONTS.regular,
     color: COLORS.textLight,
   },
   statsContainer: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    padding: SIZES.base,
     justifyContent: 'space-between',
-  },
-  statCard: {
-    width: '48%',
-    backgroundColor: COLORS.white,
-    padding: SIZES.base * 2,
-    borderRadius: SIZES.base,
     alignItems: 'center',
-    marginBottom: SIZES.base,
+    backgroundColor: COLORS.white,
+    borderRadius: SIZES.base,
+    marginHorizontal: SIZES.padding,
+    marginBottom: SIZES.padding,
+    padding: SIZES.base * 2,
     ...SHADOWS.small,
+  },
+  statItem: {
+    flex: 1,
+    alignItems: 'center',
   },
   statValue: {
     fontSize: SIZES.large,
     fontFamily: FONTS.bold,
-    color: COLORS.text,
-    marginVertical: SIZES.base / 2,
+    color: COLORS.primary,
+    marginBottom: 2,
   },
   statLabel: {
     fontSize: SIZES.small,
     fontFamily: FONTS.regular,
     color: COLORS.textLight,
-    textAlign: 'center',
   },
-  settingsContainer: {
+  statDivider: {
+    width: 1,
+    height: 40,
+    backgroundColor: COLORS.border,
+  },
+  settingsSection: {
     backgroundColor: COLORS.white,
     borderRadius: SIZES.base,
-    margin: SIZES.base,
+    marginHorizontal: SIZES.padding,
+    marginBottom: SIZES.padding,
+    padding: SIZES.base,
     ...SHADOWS.small,
+  },
+  sectionTitle: {
+    fontSize: SIZES.font,
+    fontFamily: FONTS.bold,
+    color: COLORS.text,
+    marginBottom: SIZES.base,
+    paddingHorizontal: SIZES.base,
   },
   settingItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: SIZES.base * 2,
+    paddingVertical: SIZES.base,
+    paddingHorizontal: SIZES.base,
     borderBottomWidth: 1,
-    borderBottomColor: COLORS.lightGray,
+    borderBottomColor: COLORS.border,
   },
-  settingLeft: {
-    flexDirection: 'row',
+  settingIconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: COLORS.background,
+    justifyContent: 'center',
     alignItems: 'center',
+    marginRight: SIZES.base * 2,
   },
   settingTitle: {
+    flex: 1,
     fontSize: SIZES.font,
     fontFamily: FONTS.medium,
     color: COLORS.text,
-    marginLeft: SIZES.base,
   },
   logoutButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.error,
-    margin: SIZES.base * 2,
-    padding: SIZES.base * 2,
+    backgroundColor: COLORS.white,
     borderRadius: SIZES.base,
+    marginHorizontal: SIZES.padding,
+    marginBottom: SIZES.padding * 2,
+    padding: SIZES.base * 2,
     ...SHADOWS.small,
   },
   logoutText: {
-    color: COLORS.white,
     fontSize: SIZES.font,
-    fontFamily: FONTS.medium,
+    fontFamily: FONTS.bold,
+    color: COLORS.error,
     marginLeft: SIZES.base,
   },
 }); 

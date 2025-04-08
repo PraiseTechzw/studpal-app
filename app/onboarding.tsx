@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { router } from 'expo-router';
 import { FontAwesome, MaterialIcons, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-import { COLORS, SIZES, FONTS, SHADOWS } from '../constants/theme';
+import { COLORS, SIZES, FONTS,  } from '../constants/theme';
 
 const { width } = Dimensions.get('window');
 
@@ -37,7 +37,7 @@ const onboardingData: OnboardingItem[] = [
     id: '3',
     title: 'Study Schedule',
     description: 'Create personalized study schedules that adapt to your learning style',
-    icon: <MaterialCommunityIcons name="calendar-clock" size={120} color={COLORS.accent} />,
+    icon: <MaterialCommunityIcons name="calendar-clock" size={120} color={COLORS.warning} />,
   },
   {
     id: '4',
@@ -68,7 +68,7 @@ export default function OnboardingScreen() {
         animated: true,
       });
     } else {
-      router.replace('/auth');
+      router.replace('/(auth)/index');
     }
   };
 
@@ -100,8 +100,8 @@ export default function OnboardingScreen() {
           ))}
         </View>
         
-        <TouchableOpacity style={styles.button} onPress={handleNext}>
-          <Text style={styles.buttonText}>
+        <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
+          <Text style={styles.nextButtonText}>
             {currentIndex === onboardingData.length - 1 ? 'Get Started' : 'Next'}
           </Text>
         </TouchableOpacity>
@@ -117,34 +117,38 @@ const styles = StyleSheet.create({
   },
   slide: {
     width,
-    flex: 1,
+    padding: SIZES.base * 2,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: SIZES.base * 2,
   },
   iconContainer: {
-    width: width * 0.8,
-    height: width * 0.8,
+    width: 200,
+    height: 200,
+    borderRadius: 100,
+    backgroundColor: COLORS.border,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: SIZES.base * 2,
+    marginBottom: SIZES.base * 4,
   },
   title: {
     fontSize: SIZES.extraLarge,
     fontFamily: FONTS.bold,
     color: COLORS.text,
     textAlign: 'center',
-    marginTop: SIZES.base * 2,
+    marginBottom: SIZES.base,
   },
   description: {
     fontSize: SIZES.font,
     fontFamily: FONTS.regular,
     color: COLORS.textLight,
     textAlign: 'center',
-    marginTop: SIZES.base,
     paddingHorizontal: SIZES.base * 2,
   },
   footer: {
+    position: 'absolute',
+    bottom: SIZES.base * 4,
+    left: 0,
+    right: 0,
     padding: SIZES.base * 2,
   },
   pagination: {
@@ -156,20 +160,20 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: COLORS.lightGray,
+    backgroundColor: COLORS.border,
     marginHorizontal: 4,
   },
   paginationDotActive: {
     backgroundColor: COLORS.primary,
+    width: 20,
   },
-  button: {
+  nextButton: {
     backgroundColor: COLORS.primary,
     padding: SIZES.base * 2,
     borderRadius: SIZES.base,
     alignItems: 'center',
-    ...SHADOWS.small,
   },
-  buttonText: {
+  nextButtonText: {
     color: COLORS.white,
     fontSize: SIZES.font,
     fontFamily: FONTS.medium,
