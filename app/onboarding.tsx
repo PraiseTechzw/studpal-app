@@ -6,47 +6,56 @@ import {
   FlatList,
   Dimensions,
   TouchableOpacity,
-  Image,
 } from 'react-native';
 import { router } from 'expo-router';
+import { FontAwesome, MaterialIcons, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { COLORS, SIZES, FONTS, SHADOWS } from '../constants/theme';
 
 const { width } = Dimensions.get('window');
 
-const onboardingData = [
+interface OnboardingItem {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ReactNode;
+}
+
+const onboardingData: OnboardingItem[] = [
   {
     id: '1',
     title: 'AI-Powered Study Assistant',
     description: 'Get instant help with your studies using advanced AI technology',
-    image: require('../assets/onboarding-1.png'),
+    icon: <MaterialIcons name="psychology" size={120} color={COLORS.primary} />,
   },
   {
     id: '2',
     title: 'Smart Note Taking',
     description: 'Organize your notes efficiently with AI-powered categorization',
-    image: require('../assets/onboarding-2.png'),
+    icon: <Ionicons name="document-text" size={120} color={COLORS.secondary} />,
   },
   {
     id: '3',
     title: 'Study Schedule',
     description: 'Create personalized study schedules that adapt to your learning style',
-    image: require('../assets/onboarding-3.png'),
+    icon: <MaterialCommunityIcons name="calendar-clock" size={120} color={COLORS.accent} />,
   },
   {
     id: '4',
     title: 'Progress Tracking',
     description: 'Monitor your learning progress with detailed analytics',
-    image: require('../assets/onboarding-4.png'),
+    icon: <FontAwesome name="line-chart" size={120} color={COLORS.success} />,
   },
 ];
 
 export default function OnboardingScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const flatListRef = useRef(null);
+  const flatListRef = useRef<FlatList>(null);
 
-  const renderItem = ({ item }) => (
+  const renderItem = ({ item }: { item: OnboardingItem }) => (
     <View style={styles.slide}>
-      <Image source={item.image} style={styles.image} />
+      <View style={styles.iconContainer}>
+        {item.icon}
+      </View>
       <Text style={styles.title}>{item.title}</Text>
       <Text style={styles.description}>{item.description}</Text>
     </View>
@@ -113,10 +122,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: SIZES.base * 2,
   },
-  image: {
+  iconContainer: {
     width: width * 0.8,
     height: width * 0.8,
-    resizeMode: 'contain',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: SIZES.base * 2,
   },
   title: {
     fontSize: SIZES.extraLarge,

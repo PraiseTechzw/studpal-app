@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { View, Text, StyleSheet, Animated, Easing } from 'react-native';
+import { View, Text, StyleSheet, Animated } from 'react-native';
 import { router } from 'expo-router';
-import { COLORS, SIZES, FONTS } from '../constants/theme';
+import { FontAwesome } from '@expo/vector-icons';
+import { COLORS, SIZES, FONTS, SHADOWS } from '../constants/theme';
 
 export default function SplashScreen() {
   const fadeAnim = new Animated.Value(0);
@@ -41,7 +42,7 @@ export default function SplashScreen() {
         ]}
       >
         <View style={styles.logo}>
-          <Text style={styles.logoText}>SP</Text>
+          <FontAwesome name="graduation-cap" size={50} color={COLORS.white} />
         </View>
         <Text style={styles.appName}>StudPal</Text>
         <Text style={styles.tagline}>Your AI Study Companion</Text>
@@ -68,11 +69,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     ...SHADOWS.medium,
-  },
-  logoText: {
-    color: COLORS.white,
-    fontSize: SIZES.xxl,
-    fontFamily: FONTS.bold,
   },
   appName: {
     marginTop: SIZES.base,

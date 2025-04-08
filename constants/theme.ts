@@ -41,33 +41,15 @@ export const FONTS = {
 
 export const SHADOWS = {
   small: {
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
+    boxShadow: '0px 2px 3.84px rgba(0, 0, 0, 0.25)',
     elevation: 2,
   },
   medium: {
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.30,
-    shadowRadius: 4.65,
+    boxShadow: '0px 4px 4.65px rgba(0, 0, 0, 0.30)',
     elevation: 4,
   },
   large: {
-    shadowColor: COLORS.black,
-    shadowOffset: {
-      width: 0,
-      height: 6,
-    },
-    shadowOpacity: 0.37,
-    shadowRadius: 7.49,
+    boxShadow: '0px 6px 7.49px rgba(0, 0, 0, 0.37)',
     elevation: 6,
   },
 }; 

@@ -15,7 +15,7 @@ import { COLORS, SIZES, FONTS, SHADOWS } from '../../constants/theme';
 const messages = [
   {
     id: '1',
-    text: 'Hello! I'm your AI study assistant. How can I help you today?',
+    text: "Hello! I'm your AI study assistant. How can I help you today?",
     isAI: true,
   },
 ];
@@ -37,7 +37,7 @@ export default function AIAssistantScreen() {
     // Add AI response (mock for now)
     const aiResponse = {
       id: (Date.now() + 1).toString(),
-      text: 'I'm processing your question. This is a mock response for now.',
+      text: "I'm processing your question. This is a mock response for now.",
       isAI: true,
     };
 

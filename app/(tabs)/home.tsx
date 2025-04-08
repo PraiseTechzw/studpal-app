@@ -5,9 +5,9 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Image,
 } from 'react-native';
-import { COLORS, SIZES, FONTS, SHADOWS } from '../constants/theme';
+import { COLORS, SIZES, FONTS, SHADOWS } from '../../constants/theme';
+import { FontAwesome } from '@expo/vector-icons';
 
 const features = [
   {
@@ -57,10 +57,7 @@ export default function HomeScreen() {
           <Text style={styles.subtitle}>Ready to learn something new?</Text>
         </View>
         <TouchableOpacity style={styles.profileButton}>
-          <Image
-            source={require('../assets/profile-placeholder.png')}
-            style={styles.profileImage}
-          />
+          <FontAwesome name="user-circle" size={24} color={COLORS.text} />
         </TouchableOpacity>
       </View>
 
@@ -134,12 +131,10 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    overflow: 'hidden',
+    backgroundColor: COLORS.white,
+    justifyContent: 'center',
+    alignItems: 'center',
     ...SHADOWS.small,
-  },
-  profileImage: {
-    width: '100%',
-    height: '100%',
   },
   statsContainer: {
     flexDirection: 'row',

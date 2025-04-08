@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import { router } from 'expo-router';
 import { COLORS, SIZES, FONTS, SHADOWS } from '../constants/theme';
+import { FontAwesome } from '@expo/vector-icons';
 
 export default function AuthScreen() {
   const [isLogin, setIsLogin] = useState(true);
@@ -20,7 +21,7 @@ export default function AuthScreen() {
 
   const handleSubmit = () => {
     // TODO: Implement authentication logic
-    router.replace('/home');
+    router.replace('/(tabs)/home');
   };
 
   return (
@@ -30,6 +31,9 @@ export default function AuthScreen() {
     >
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.header}>
+          <View style={styles.logoContainer}>
+            <FontAwesome name="graduation-cap" size={50} color={COLORS.primary} />
+          </View>
           <Text style={styles.title}>Welcome to StudPal</Text>
           <Text style={styles.subtitle}>
             {isLogin ? 'Sign in to continue' : 'Create an account'}
@@ -100,6 +104,16 @@ const styles = StyleSheet.create({
   header: {
     marginTop: SIZES.base * 4,
     marginBottom: SIZES.base * 4,
+    alignItems: 'center',
+  },
+  logoContainer: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: COLORS.lightGray,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: SIZES.base * 2,
   },
   title: {
     fontSize: SIZES.extraLarge,

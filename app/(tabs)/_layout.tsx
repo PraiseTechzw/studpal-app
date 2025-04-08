@@ -11,7 +11,7 @@ export default function TabLayout() {
           backgroundColor: COLORS.white,
           borderTopWidth: 0,
           elevation: 0,
-          shadowOpacity: 0,
+          boxShadow: 'none',
           height: 60,
           paddingBottom: 8,
           paddingTop: 8,
@@ -24,7 +24,7 @@ export default function TabLayout() {
         name="home"
         options={{
           title: 'Home',
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }: { color: string }) => (
             <FontAwesome name="home" size={24} color={color} />
           ),
         }}
@@ -33,7 +33,7 @@ export default function TabLayout() {
         name="study"
         options={{
           title: 'Study',
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }: { color: string }) => (
             <FontAwesome name="book" size={24} color={color} />
           ),
         }}
@@ -42,8 +42,8 @@ export default function TabLayout() {
         name="ai-assistant"
         options={{
           title: 'AI Assistant',
-          tabBarIcon: ({ color }) => (
-            <FontAwesome name="robot" size={24} color={color} />
+          tabBarIcon: ({ color }: { color: string }) => (
+            <FontAwesome name="microchip" size={24} color={color} />
           ),
         }}
       />
@@ -51,7 +51,7 @@ export default function TabLayout() {
         name="profile"
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color }) => (
+          tabBarIcon: ({ color }: { color: string }) => (
             <FontAwesome name="user" size={24} color={color} />
           ),
         }}
